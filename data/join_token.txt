@@ -1,0 +1,1 @@
+kubeadm join 172.20.1.50:6443 --token n3tt7e.iozg0bed3u5tzl89 --discovery-token-ca-cert-hash sha256:6c9a2fb14b2396339646211590598e6f8d5a4fc7e4e465fc7e7fc82144645b79 
