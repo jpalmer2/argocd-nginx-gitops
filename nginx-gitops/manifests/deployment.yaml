@@ -1,0 +1,51 @@
+apiVerison: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+  namespace: nginx-demo
+  labels:
+    app: nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.25.3
+          ports:
+            - containerPort: 80
+              name: http
+          # Resource limits for production readiness
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 250m
+              memory: 256Mi
+          # Health check to verify Nginx is serving
+          livesnessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          redinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          volumeMounts:
+            - name: html-volume
+            mountPath: /usr/share/nginx/html
+      volumes:
+        - name: html-volume
+          configmap:
+            name: nginx-html
