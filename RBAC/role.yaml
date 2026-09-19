@@ -5,5 +5,8 @@ metadata:
   name: developers-role
 rules:
   - apiGroups: ["", "apps"]
-    resources: ["pods", "deployments", "services"]
+    resources: ["pods", "deployments", "services", "configmaps", "secrets"]
+    verbs: ["get", "list", "watch", "create"]
+  - apiGroups: ["cert-manager.io"]
+    resources: ["certificates"]
     verbs: ["get", "list", "watch", "create"]
