@@ -1,0 +1,9 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: nginx-demo
+  name: developers-role
+rules:
+  - apiGroups: ["", "apps"]
+    resources: ["pods", "deployments", "services"]
+    verbs: ["get", "list", "watch", "create"]
