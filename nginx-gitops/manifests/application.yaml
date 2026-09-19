@@ -9,10 +9,10 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.comjpalmer2/argocd-nginx-gitops.git 
-    targetRevision: main
-    path: manifests
-  ddestination:
+    repoURL: https://github.com/jpalmer2/argocd-nginx-gitops.git
+    targetRevision: master
+    path: nginx-gitops/manifests
+  destination:
     server: https://kubernetes.default.svc
     namespace: nginx-demo
   syncPolicy:

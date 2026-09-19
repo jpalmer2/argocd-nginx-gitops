@@ -1,15 +1,36 @@
 apiVersion: v1
-kind: configMap
+kind: ConfigMap
 metadata:
   name: nginx-html
   namespace: nginx-demo
 data:
   index.html: |
-  <!Doctype html>
-  <html>
-  <head><title>ArgoCD Nginx Demo</title></head>
-  <body>
-    <h1>Deployed with ArgoCD GitOps</h1>
-    <p> This page is managed by ArgoCD.</p>
-  </body>
-  </html>
+    <!DOCTYPE html>
+    <html>
+      <head><title>ArgoCD Nginx Demo</title></head>
+      <body>
+        <h1>Deployed with ArgoCD GitOps</h1>
+        <p>This page is managed by ArgoCD and served over TLS from cert-manager.</p>
+      </body>
+    </html>
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-config
+  namespace: nginx-demo
+data:
+  default.conf: |
+    server {
+        listen 80;
+        listen 443 ssl;
+        server_name demo.example.com;
+
+        ssl_certificate     /etc/nginx/certs/tls.crt;
+        ssl_certificate_key /etc/nginx/certs/tls.key;
+
+        root /usr/share/nginx/html;
+        location / {
+            index index.html;
+        }
+    }
