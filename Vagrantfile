@@ -2,15 +2,15 @@ Vagrant.configure("2") do |config|
 	servers=[
 		{
 			:hostname => "master",
-			:box => "cloud-image/ubuntu-24.04",
+			:box => "bento/ubuntu-24.04",
 			:ip => "172.20.1.50",
 		},{
             :hostname => "worker1",
-            :box => "cloud-image/ubuntu-24.04",
+            :box => "bento/ubuntu-24.04",
             :ip => "172.20.1.51",
 		},{
 			:hostname => "worker2",
-            :box => "cloud-image/ubuntu-24.04",
+            :box => "bento/ubuntu-24.04",
             :ip => "172.20.1.52",
 		}
 	]
